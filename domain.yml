@@ -1,34 +1,145 @@
 version: "3.1"
 
-intents:
-  - greet
-  - goodbye
-  - affirm
-  - deny
-  - mood_great
-  - mood_unhappy
-  - bot_challenge
-
-responses:
-  utter_greet:
-  - text: "Hey! How are you?"
-
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
-
-  utter_did_that_help:
-  - text: "Did that help you?"
-
-  utter_happy:
-  - text: "Great, carry on!"
-
-  utter_goodbye:
-  - text: "Bye"
-
-  utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
-
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true
+
+intents:
+  - greet
+  - goodbye
+  - thankyou
+  - confirm
+  - praise
+  - decry
+  - ask_ability
+  - ask_for_trending_by_hashtag
+  - cá nhân
+  - tiết kiệm
+  - cho vay
+  - dịch vụ
+  - ngân hàng
+  - điện tử 
+  - thẻ
+  - tài khoản
+  - đăng ký trực tuyến
+# - doanh nghiệp
+responses:
+  utter_default:
+    - text: Bot xin lỗi, bot chưa hiểu ý muốn của bạn. Bạn có thể nói lại được không?
+  utter_fallback:
+    - text: Bot xin lỗi, bot chưa hiểu ý muốn của bạn. Bạn có thể nói lại được không?
+
+  utter_greet:
+    - text: "Xin chào {name} {surname}!
+        \nRất hân hạnh được phục vụ
+        \nBạn cần được hỗ trợ với vai trò là cá nhân hay doanh nghiệp"
+
+  utter_goodbye:
+    - text: Hẹn gặp lại bạn
+      image: https://i.imgur.com/nGF1K8f.jpg
+
+  utter_show_ability:
+    - text: Bot có thể tư vấn các sản phẩm và dịch vụ hiện có của sacombank
+
+  utter_noworries:
+    - text: Bot luôn sẵn lòng giúp đỡ bạn 24/7 bất cứ lúc nào, bất cứ nơi đâu!
+
+  utter_happy:
+    - text: Hì hì, bạn khen quá lời rồi ạ!
+
+  utter_sorry:
+    - text: Bot xin lôĩ vì chưa đủ thông minh để phục vụ bạn đúng cách
+
+  # utter_confirm:
+  #   - text: Cho bot biết rõ hashtag được không ạ (Chỉ nhập từ khóa)?
+  #   - text: Hashtag bạn muốn tìm kiếm là gì (Chỉ nhập từ khóa)
+  #   - text: Vui lòng cho bot biết từ khóa bạn muốn tìm kiếm (Chỉ nhập từ khóa)
+
+  utter_iamabot:
+    - text: Tôi là Chatbot là của ngân hàng Sacombank
+
+  utter_wait_a_minute:
+    - text: Đợi xíu nhé!
+
+actions:
+  - utter_greet
+  - utter_happy
+  - utter_goodbye
+  - utter_sorry
+  - utter_noworries
+  - utter_show_ability
+  - utter_fallback
+  - utter_iamabot
+  - utter_confirm
+  - utter_wait_a_minute
+
+  - action_top_trending_tiktok
+  - action_top_trending_youtube
+  - action_trending_by_hashtag
+  - action_top_youtube_trending_by_category
+  - action_top_tiktok_trending_by_category
+  - action_name
+  - action_see_more_trending
+  - action_trend_is_bad
+  - action_trend_is_normal
+  - action_trend_is_good
+entities:
+  - hashtag
+  - platform
+  - youtubeCategory
+  - tiktokCategory
+  - name
+  - surname
+
+forms:
+  platform_form:
+    required_slots:
+      - platform
+  hashtag_form:
+    required_slots:
+      - hashtag
+
+slots:
+  hashtag:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_text
+        intent: confirm_hashtag
+        not_intent: ask_for_trending_tiktok_by_category
+        # conditions:
+        #   - active_loop: hashtag_form
+        #     requested_slot: hashtag
+
+  platform:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: platform
+
+  youtubeCategory:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: youtubeCategory
+
+  tiktokCategory:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: tiktokCategory
+
+  name:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: name
+
+  surname:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: surname
