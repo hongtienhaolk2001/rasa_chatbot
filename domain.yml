@@ -12,54 +12,68 @@ intents:
   - praise
   - decry
   - ask_ability
-  - ask_for_trending_by_hashtag
-  - cá nhân
-  - tiết kiệm
-  - cho vay
-  - dịch vụ
-  - ngân hàng
-  - điện tử 
-  - thẻ
-  - tài khoản
-  - đăng ký trực tuyến
-# - doanh nghiệp
+  - interest_is_high
+  - interest_is_low
+  - ask_for_interest
+  - credit
+  - open_account
+
 responses:
+  ################################ ################################
+  ################################ MỞ THẺ TÍN DỤNG ################################
+  utter_income_vnd:
+    - text: "Với thu nhập là {income_vnd} bạn có thể mở được các loại thẻ như: 
+        \n - Thẻ x: phù hợp với
+        \n - Thẻ y: phù hợp với
+        \n - Thẻ z: phù hợp với
+        \nbạn muốn chọn loại nào?"
+  
+  ############################# GỬI TIỀN TIẾT KIỆM ################################
+  utter_interest_is_low:
+    - text: "Do [phần lý do sẽ được cập nhật] nên lãi suất thấp."
+  
+  utter_interest_is_high:
+    - text: "Do [phần lý do sẽ được cập nhật] nên lãi suất cao, bạn nên cân nhắc gửi tiền ở ngân hàng nhé"
+  
+  ############################# TRƯỜNG HỢP KHÔNG XÁC ĐỊNH ##########################
   utter_default:
-    - text: Bot xin lỗi, bot chưa hiểu ý muốn của bạn. Bạn có thể nói lại được không?
+    - text: "Bot xin lỗi, bot chưa hiểu rõ ý của bạn. 
+        \nBạn có thể nói lại chi tiết hơn được được không?"
   utter_fallback:
     - text: Bot xin lỗi, bot chưa hiểu ý muốn của bạn. Bạn có thể nói lại được không?
 
+  ################################## CHÀO HỎI ######################################
   utter_greet:
-    - text: "Xin chào {name} {surname}!
-        \nRất hân hạnh được phục vụ
+    - text: "Ngân hàng Sacombank Rất hân hạnh được phục vụ!
         \nBạn cần được hỗ trợ với vai trò là cá nhân hay doanh nghiệp"
 
   utter_goodbye:
-    - text: Hẹn gặp lại bạn
-      image: https://i.imgur.com/nGF1K8f.jpg
-
-  utter_show_ability:
-    - text: Bot có thể tư vấn các sản phẩm và dịch vụ hiện có của sacombank
-
+    - text: Rất vui được phục vụ bạn và hẹn gặp lại bạn
+      image: "static/cat-animated.gif"
+  
   utter_noworries:
     - text: Bot luôn sẵn lòng giúp đỡ bạn 24/7 bất cứ lúc nào, bất cứ nơi đâu!
 
   utter_happy:
-    - text: Hì hì, bạn khen quá lời rồi ạ!
+    - text: Cảm ởn bạn, đây sẽ là động lực để chúng tôi duy trì!
 
   utter_sorry:
-    - text: Bot xin lôĩ vì chưa đủ thông minh để phục vụ bạn đúng cách
-
-  # utter_confirm:
-  #   - text: Cho bot biết rõ hashtag được không ạ (Chỉ nhập từ khóa)?
-  #   - text: Hashtag bạn muốn tìm kiếm là gì (Chỉ nhập từ khóa)
-  #   - text: Vui lòng cho bot biết từ khóa bạn muốn tìm kiếm (Chỉ nhập từ khóa)
-
+    - text: "Bot xin lôĩ vì chưa đủ thông minh để phục vụ bạn đúng cách
+        \nbạn có thể gọi đến số XXX-XXXX-XXX để được tư vấn trức tiếp."
+  
+  ############################### GIỚI THIỆU CHATBOT ###############################
+  utter_show_ability:
+    - text: "Chatbot có thể tư vấn các sản phẩm và dịch vụ hiện có của sacombank
+        \n- Mở tài khoản
+        \n- Tư vấn cho vay
+        \n- Gửi tiết kiệm"
+    
   utter_iamabot:
-    - text: Tôi là Chatbot là của ngân hàng Sacombank
-
+    - text: Tôi là chatbot của ngân hàng Sacombank    
+  
+  #################################### HỆ THỐNG ###################################
   utter_wait_a_minute:
-    - text: Đợi xíu nhé!
+    - text: Bạn vui lòng đợi trong giây lát!
 
 actions:
   - utter_greet
@@ -70,76 +84,26 @@ actions:
   - utter_show_ability
   - utter_fallback
   - utter_iamabot
-  - utter_confirm
   - utter_wait_a_minute
+  - utter_interest_is_low
+  - utter_interest_is_high
 
-  - action_top_trending_tiktok
-  - action_top_trending_youtube
-  - action_trending_by_hashtag
-  - action_top_youtube_trending_by_category
-  - action_top_tiktok_trending_by_category
-  - action_name
-  - action_see_more_trending
-  - action_trend_is_bad
-  - action_trend_is_normal
-  - action_trend_is_good
 entities:
-  - hashtag
-  - platform
-  - youtubeCategory
-  - tiktokCategory
-  - name
-  - surname
-
-forms:
-  platform_form:
-    required_slots:
-      - platform
-  hashtag_form:
-    required_slots:
-      - hashtag
+  - role
+  - income_vnd
 
 slots:
-  hashtag:
-    type: text
-    influence_conversation: true
-    mappings:
-      - type: from_text
-        intent: confirm_hashtag
-        not_intent: ask_for_trending_tiktok_by_category
-        # conditions:
-        #   - active_loop: hashtag_form
-        #     requested_slot: hashtag
-
-  platform:
+  role:
     type: text
     influence_conversation: true
     mappings:
       - type: from_entity
-        entity: platform
+        entity: role
 
-  youtubeCategory:
-    type: text
-    influence_conversation: true
+  income_vnd:
+    type: float
+    min_value: 1.0
+    max_value: 99999.0
     mappings:
       - type: from_entity
-        entity: youtubeCategory
-
-  tiktokCategory:
-    type: text
-    influence_conversation: true
-    mappings:
-      - type: from_entity
-        entity: tiktokCategory
-
-  name:
-    type: text
-    mappings:
-      - type: from_entity
-        entity: name
-
-  surname:
-    type: text
-    mappings:
-      - type: from_entity
-        entity: surname
+        entity: income_vnd

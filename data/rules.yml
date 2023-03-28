@@ -1,14 +1,15 @@
 version: "3.1"
 
 rules:
+################################## TESTING ##################################
+  - rule: REPLY INCOM
+    steps:
+      - intent: income_vnd
+      - action: utter_income_vnd
+################################## GIAO TIẾP CƠ BẢN ##################################
   - rule: Say hi anytime the user says hi
     steps:
       - intent: greet
-      - action: action_name
-      - slot_was_set:
-          - name: Tu
-      - slot_was_set:
-          - surname: Dang
       - action: utter_greet
 
   - rule: Say goodbye anytime the user say  s goodbye
@@ -26,95 +27,85 @@ rules:
       - intent: thankyou
       - action: utter_noworries
 
-  - rule: Show ability the user ask
-    steps:
-      - intent: ask_ability
-      - action: utter_show_ability
-
   - rule: Sorry when user decry
     steps:
       - intent: decry
       - action: utter_sorry
 
+  - rule: Show ability the user ask
+    steps:
+      - intent: ask_ability
+      - action: utter_show_ability
+################################## GỬI TIẾT KIỆM ##################################
+  - rule: User say interest is high
+    steps:
+      - intent: interest_is_high
+      - action: utter_interest_is_high
+
+  - rule: User say interest is low
+    steps:
+      - intent: interest_is_low
+      - action: utter_interest_is_low
+
+  - rule: User ask about service on Sacombank and show service
+    steps:
+      - intent: ask_for_interest
+      - action: utter_wait_a_minute
+################################## TRƯỜNG HỢP KHÔNG XÁC ĐỊNH ##################################
   - rule: Ask the user to rephrase whenever they send a message with low NLU confidence
     steps:
       - intent: nlu_fallback
       - action: utter_fallback
+  # - rule: User ask about trending on youtube and show category
+  #   steps:
+  #     - intent: ask_for_trending_youtube
+  #     - action: utter_wait_a_minute
+  #     # - action: action_top_trending_youtube
 
-  - rule: User ask about trending on tiktok and show category
-    steps:
-      - intent: ask_for_trending_tiktok
-      - action: utter_wait_a_minute
-      - action: action_top_trending_tiktok
+  # - rule: Ask for hashtag
+  #   condition:
+  #     - active_loop: platform_form
+  #   steps:
+  #     - action: platform_form
+  #     - active_loop: null
+  #     - slot_was_set:
+  #         - requested_slot: null
+  #     - action: utter_confirm
 
-  - rule: User ask about trending on youtube and show category
-    steps:
-      - intent: ask_for_trending_youtube
-      - action: utter_wait_a_minute
-      - action: action_top_trending_youtube
+  # - rule: Confirm hashtag
+  #   steps:
+  #     - intent: confirm_hashtag
+  #     - action: hashtag_form
+  #     - active_loop: hashtag_form
 
-  - rule: Reply user tiktok trending by category selected
-    steps:
-      - intent: ask_for_trending_tiktok_by_category
-      - action: utter_wait_a_minute
-      - action: action_top_tiktok_trending_by_category
+  # - rule: Reply trending by hashtag
+  #   condition:
+  #     - active_loop: hashtag_form
+  #   steps:
+  #     - action: hashtag_form
+  #     - active_loop: null
+  #     - slot_was_set:
+  #         - requested_slot: null
+  #     - action: utter_wait_a_minute
+  #     - action: action_trending_by_hashtag
 
-  - rule: Reply user youtube trending by category selected
-    steps:
-      - intent: ask_for_trending_youtube_by_category
-      - action: utter_wait_a_minute
-      - action: action_top_youtube_trending_by_category
+  # - rule: Reply see more trending
+  #   steps:
+  #     - intent: ask_for_more_trending
+  #     - action: utter_wait_a_minute
+  #     - action: action_see_more_trending
 
-  - rule: Find trending by hashtag
-    steps:
-      - intent: ask_for_trending_by_hashtag
-      - action: platform_form
-      - active_loop: platform_form
+  # - rule: Reply trend is bad
+  #   steps:
+  #     - intent: trend_is_bad
+  #     - action: action_trend_is_bad
 
-  - rule: Ask for hashtag
-    condition:
-      - active_loop: platform_form
-    steps:
-      - action: platform_form
-      - active_loop: null
-      - slot_was_set:
-          - requested_slot: null
-      - action: utter_confirm
+  # - rule: Reply trend is normal
+  #   steps:
+  #     - intent: trend_is_normal
+  #     - action: action_trend_is_normal
 
-  - rule: Confirm hashtag
-    steps:
-      - intent: confirm_hashtag
-      - action: hashtag_form
-      - active_loop: hashtag_form
-
-  - rule: Reply trending by hashtag
-    condition:
-      - active_loop: hashtag_form
-    steps:
-      - action: hashtag_form
-      - active_loop: null
-      - slot_was_set:
-          - requested_slot: null
-      - action: utter_wait_a_minute
-      - action: action_trending_by_hashtag
-
-  - rule: Reply see more trending
-    steps:
-      - intent: ask_for_more_trending
-      - action: utter_wait_a_minute
-      - action: action_see_more_trending
-
-  - rule: Reply trend is bad
-    steps:
-      - intent: trend_is_bad
-      - action: action_trend_is_bad
-
-  - rule: Reply trend is normal
-    steps:
-      - intent: trend_is_normal
-      - action: action_trend_is_normal
-
-  - rule: Reply trend is good
-    steps:
-      - intent: trend_is_good
-      - action: action_trend_is_good
+  # - rule: Reply trend is good
+  #   steps:
+  #     - intent: trend_is_good
+  #     - action: action_trend_is_good

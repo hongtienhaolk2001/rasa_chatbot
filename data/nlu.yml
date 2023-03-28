@@ -2,22 +2,32 @@ version: "3.1"
 
 nlu:
   - intent: income
-    example:  |
-    - [$0123456789$](income_vnd)
-    - thu nhập của tôi là [$0123456789$](income_vnd)
-    - tôi kiếm [$0123456789$](income_vnd) mỗi tháng
-    - mỗi tháng dao động từ [$0123456789$](income_vnd)
+    examples: |
+      - [123456789](income_vnd)
+      - thu nhập của tôi là [123456789](income_vnd) triệu
+      - tôi kiếm [123456789](income_vnd) triệu mỗi tháng
+      - mỗi tháng dao động khoảng [123456789](income_vnd)
   - regex: income_vnd
     examples: |
-    - $?\d{1,12}$?
+      - \d{1,3}
 
   - intent: open_account
     examples: |
-    - Tôi muốn mở tải khoản
-    - Mở tài khoản như thế nào
-    - Mở tài khoản có ưu đãi gì
-    - 
-
+      - Tôi muốn mở tải khoản
+      - Mở tài khoản như thế nào
+      - Mở tài khoản có ưu đãi gì
+  
+  - synonym: credit
+    examples: |
+      - tài khoản tín dụng
+      - thẻ tín dụng
+      - tài khoản ghi nợ
+      - thẻ ghi nợ
+      - thẻ credit
+      - tài khoản credit
+      - thẻ trả sau
+      - tài khoản trả sau
+  
   - intent: greet
     examples: |
       - chào em
@@ -160,235 +170,26 @@ nlu:
       - tính năng còn kém quá
       - tính năng còn hơi ít nha
 
-  - intent: ask_for_trending_by_hashtag
+  - intent: ask_for_interest
     examples: |
-      - cho anh xem trending theo hashtag trên [tiktok](platform) đi
-      - tìm các video trending theo hashtag trên [youtube](platform) giúp anh
-      - lấy thông tin về trending trên [tiktok](platform) giúp anh theo từ khóa
-      - xem trending ở [youtube](platform) theo từ khóa nào
-      - trending theo hashtag ở [tiktok](platform) nào
-      - anh muốn tìm kiếm trending theo từ khóa trên [tiktok](platform)
-      - sử dụng từ khóa để tìm kiếm video trending [youtube](platform) nào
-      - sử dụng hashtag để tìm kiếm video trending [tiktok](platform) nào
-      - mình muốn tìm kiếm trend ở [youtube](platform) theo từ khóa
-      - từ khóa này có phải là trend trên [tiktok](platform) không?
-      - các video mới nhất của trend hashtag ở [tiktok](platform) là gì?
-      - mình có từ khóa này muốn tìm kiếm trên [tiktok](platform)
-      - từ khóa này có thông tin gì trên [tiktok](platform) ta?
-      - có thể cho mình tìm trend theo từ khóa ở [youtube](platform) được không?
-
-  - intent: confirm_hashtag
+      - cho anh xem lãi suất trên sacombank đi
+      - lãi suất tiền gửi hôm nay bao nhiêu
+      - lãi suất gửi tiết kiệm
+  
+  - intent: interest_is_high
     examples: |
-      - [cosplay](hashtag)
-      - [gaixinh](hashtag)
-      - [sontung](hashtag)
-      - [comedy](hashtag)
-      - [bienhinh](hashtag)
-      - [tocdep](hashtag)
-      - [leageoflegend](hashtag)
-      - [vtv24](hashtag)
-      - [blackpink](hashtag)
-      - [anime](hashtag)
-      - [xuhuong](hashtag)
-      - [viral](hashtag)
-      - [chipu](hashtag)
-      - [dancer](hashtag)
-      - [coding](hashtag)
-      - [cooking](hashtag)
-      - [lienquan](hashtag)
-      - [artist](hashtag)
-      - [love](hashtag)
+      - lãi suất cao quá
+      - lãi suất nặng quá
+      - khi nào lãi suất giảm      
 
-  - intent: ask_for_trending_tiktok
+  - intent: interest_is_low
     examples: |
-      - cho anh xem trending trên tiktok đi
-      - bây giờ tiktok đang có trend gì nhỉ
-      - lấy thông tin về trending trên tiktok giúp anh
-      - xem trending ở tiktok nào 
-      - có gì hot trên tiktok ta
-      - vài video trending của tiktok đi
-      - top trending tiktok bây giờ là gì nhỉ?
-      - cho mình thông tin về trend trên platform đi 
-      - hôm nay trend tiktok có gì nhỉ?
-      - hôm nay có gì mới lạ trên tiktok không ta?
-      - hình như có trend gì đó mới trên tiktok à?
-      - cho mình biết được trend trên tiktok đi?
-      - mình muốn cập nhật thông tin về trend ở tiktok
-      - gửi chị xem thông tin về trend của tiktok đi
-      - trending bây giờ là gì nhỉ ở tiktok ấy
-      - ngày hôm nay có trend gì mới trên tiktok không thế?
-      - khám phá trending trên tiktok đi
-      - hình như đang có trend gì đó trên tiktok phải không
-      - top trend ở tiktok là gì?
-      - tiktok hôm nay có gì hay ho không 
-      - lâu quá chưa cập nhật thông tin về trending trên tiktok
-      - nhờ bot giúp mình xem top trend trên tiktok đi 
-      - bot có thể cho mình xem thông tin về các trend mới trên tiktok được không
+      - lãi suất thấp quá
+      - lãi suất mềm
 
-
-  - intent: ask_for_more_trending
-    examples: |
-      - xem thêm nữa đi
-      - một vài trend nữa nhé
-      - có gì nữa không
-      - thêm một vài cái đi
-      - xem thêm nữa đi nè
-      - một vài cái nữa đi
-      - xem thêm trend đi
-      - mình muốn xem thêm một vài trend
-      - có thể cho mình xem thêm không
-      - còn gì nữa không nhỉ
-
-  - intent: trend_is_bad
-    examples: |
-      - những trend hôm nay tệ quá
-      - trend này không hay
-      - bot hôm nay giới thiệu tệ quá
-      - không được hay lắm
-      - bot giới thiệu trend không hay lắm
-
-  - intent: trend_is_normal
-    examples: |
-      - trend tạm được
-      - những trend này cũng được
-      - cũng khá ổn
-
-  - intent: trend_is_good
-    examples: |
-      - trend hôm nay hay quá
-      - hôm nay bot giới thiệu hay quá
-      - trend hay quá bot ơi
-      - mọi giới thiệu trend hôm nay đều hay
-
-  - lookup: hashtag
-    examples: |
-      - sontung
-      - cosplay
-      - mtp
-      - vtv24
-      - seagames
-      - covid
-      - worldcup
-      - gaixinh 
-      - traidep
-      - fyp
-      - foryoupage
-      - singsong
-      - funny
-      - duet
-      - trending
-      - love
-      - memes
-      - cute
-      - comedy
-      - featureme
-      - repost
-      - new
-      - workout
-      - artist
-      - happy
-      - gaming
-      - freefire
-      - leageoflegends
-      - lol
-      - pubg
-      - mobile
-      - lienquan
-      - anime
-      - bts
-      - quanghungmasterd
-      - cat
-      - dog
-      - beautiful
-      - cooking
-      - photography
-      - dancer
-      - slowmo
-      - gym
-      - singing
-      - lifehack
-      - repect
-      - football
-      - nature
-      - amazing
-      - wibu
-      - vacaiket 
-      - ngoctrinh
-      - hienho
-      - datvilla
-      - xuhuong
-      - tiktok
-      - khaicakhia
-      - phamvinh
-      - ciin
-      - lebong
-      - change.mie
-      - thaybeou40
-      - 3tl
-      - ancungtiktok
-      - bienhinh
-      - nau an
-      - ngoaihanganh
-      - manchester
-      - damcuoi
-      - mientay
-      - giaxang
-      - devuong
-      - skincare
-      - genz
-      - gaidep
-      - hotgirl
-      - lisa
-      - rose
-      - jisoo
-      - blackpink
-      - missuniver
-      - lazada
-      - shopee
-      - tiki
-      - it
-      - cong nghe thong tin
-      - laptrinh
-      - coding
-      - lifestyle
-      - heallth
-
-  - lookup: platform
-    examples: |
-      - youtube
-      - tiktok
-      - twitter
-
-  - lookup: youtubeCategory
-    examples: |
-      - thể thao
-      - thời sự
-      - hình sự
-      - tin mới
-      - xe cộ
-      - phương tiện
-      - thú nuôi
-      - vật nuôi
-      - động vật
-      - thú cưng
-      - film      
-      - animation      
-      - autos      
-      - vehicles      
-      - music
-      - pets
-      - animals
-      - sports
-      - travel
-      - events
-      - gaming
-      - people 
-      - blogs
-      - comedy
-      - entertainment
-      - news
-      - politics
-      - howto
-      - style
-      - science
-      - technology
+  # - intent: personal
+  # - intent: online_banking
+  # - intent: save_money
+  # - intent: loans
+  # - intent: card 
+  # - intent: business

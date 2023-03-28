@@ -1,10 +1,25 @@
 # rasa_chatbot
+## Introduce
+Xây dưng chatbot cho ngân hàng, thay thế các chức năng cũ kỹ (rule-based) trên nền tảng **rasa** chatbot
+## Usage
+```bash
+pip install -r requirements.txt
+```
+and download `.bin` file here [here](https://www.kaggle.com/datasets/aeryss/fasttext-vietnamese-word-vectors-full), then add file to fasttext folder.
 
-## library
-1. fasttext: (download .bin [here](https://www.kaggle.com/datasets/aeryss/fasttext-vietnamese-word-vectors-full))
-2. underthesea::
+train and run project by command:
 
-## Pipeline
+```bash
+rasa train
+rasa shell
+```
+## Functional
+### todo
+- chào hỏi cơ bản
+- trích xuất entity
+- 
+
+### Pipeline
 
 1. Bước token hóa:
 - WhitspaceTokenizer: lấy token cách nhau white space/newline/tab bằng thư viện underthesea (vietnamese)
